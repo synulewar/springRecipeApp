@@ -2,6 +2,7 @@ package com.synulewar.receipe.model;
 
 import javax.persistence.*;
 
+@Entity
 public class Notes {
 
     @Id
