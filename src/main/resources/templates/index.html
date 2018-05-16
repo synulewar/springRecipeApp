@@ -6,6 +6,14 @@
 </head>
 <body>
 <h1>My Recepies!</h1>
+<table>
+    <tr>
+        <th>Recipe name</th>
+    </tr>
+    <tr th:each="recipe : ${recipes}">
+        <td th:text="${recipe.getDescription()}">Kotlet</td>
+    </tr>
+</table>
 
 </body>
 </html>
