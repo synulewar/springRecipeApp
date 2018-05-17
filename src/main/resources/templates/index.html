@@ -8,10 +8,12 @@
 <h1>My Recepies!</h1>
 <table>
     <tr>
-        <th>Recipe name</th>
+        <th>ID</th>
+        <th>Description</th>
     </tr>
     <tr th:each="recipe : ${recipes}">
-        <td th:text="${recipe.getDescription()}">Kotlet</td>
+        <td th:text="${recipe.id}">11</td>
+        <td th:text="${recipe.description}">Marmolada</td>
     </tr>
 </table>
 

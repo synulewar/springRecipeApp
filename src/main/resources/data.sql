@@ -10,3 +10,4 @@ INSERT INTO unit_of_measure (uom) VALUES ('Ounce');
 INSERT INTO unit_of_measure (uom) VALUES ('Ripe');
 INSERT INTO unit_of_measure (uom) VALUES ('Dash');
 INSERT INTO unit_of_measure (uom) VALUES ('Clove');
+INSERT INTO unit_of_measure (uom) VALUES ('Each');
