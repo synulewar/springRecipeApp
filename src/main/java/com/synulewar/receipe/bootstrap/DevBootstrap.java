@@ -141,14 +141,13 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 " the avocado and will help delay the avocados from turning brown.\n");
         Notes guacNotes = new Notes();
         guacNotes.setRecipeNotes("For a very quick guacamole just take a 1/4 cup of salsa and mix it in with your mashed avocados.");
-        guacNotes.setRecipe(guacamole);
         guacamole.setNotes(guacNotes);
 
 
-        guacamole.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2), each, guacamole));
-        guacamole.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(".5"), teaspoon, guacamole));
-        guacamole.getIngredients().add(new Ingredient("fresh lime juice", new BigDecimal(2), tablespoon, guacamole));
-        guacamole.getIngredients().add(new Ingredient("blac peper", new BigDecimal(2), dash, guacamole));
+        guacamole.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2), each));
+        guacamole.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(".5"), teaspoon));
+        guacamole.getIngredients().add(new Ingredient("fresh lime juice", new BigDecimal(2), tablespoon));
+        guacamole.getIngredients().add(new Ingredient("blac peper", new BigDecimal(2), dash));
 
 
         guacamole.getCategories().add(american);
@@ -164,10 +163,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         grilledChicken.setDirections("1. Random step i just have to type anythin\n2. Second part of miningless decription\n");
         Notes grilledNotes = new Notes();
         grilledNotes.setRecipeNotes("Dont do it better to cook with vapour");
-        grilledNotes.setRecipe(grilledChicken);
         grilledChicken.setNotes(grilledNotes);
-        grilledChicken.getIngredients().add(new Ingredient("Chicken", new BigDecimal(1), each, grilledChicken));
-        grilledChicken.getIngredients().add(new Ingredient("Garlic", new BigDecimal(2), teaspoon, grilledChicken));
+        grilledChicken.getIngredients().add(new Ingredient("Chicken", new BigDecimal(1), each));
+        grilledChicken.getIngredients().add(new Ingredient("Garlic", new BigDecimal(2), teaspoon));
         grilledChicken.getCategories().add(fastFood);
         grilledChicken.getCategories().add(italian);
         recipieRepository.save(grilledChicken);
