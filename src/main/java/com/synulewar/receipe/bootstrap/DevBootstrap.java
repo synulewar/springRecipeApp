@@ -144,10 +144,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         guacamole.setNotes(guacNotes);
 
 
-        guacamole.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2), each));
-        guacamole.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(".5"), teaspoon));
-        guacamole.getIngredients().add(new Ingredient("fresh lime juice", new BigDecimal(2), tablespoon));
-        guacamole.getIngredients().add(new Ingredient("blac peper", new BigDecimal(2), dash));
+        guacamole.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), each));
+        guacamole.addIngredient(new Ingredient("Kosher salt", new BigDecimal(".5"), teaspoon));
+        guacamole.addIngredient(new Ingredient("fresh lime juice", new BigDecimal(2), tablespoon));
+        guacamole.addIngredient(new Ingredient("blac peper", new BigDecimal(2), dash));
 
 
         guacamole.getCategories().add(american);
@@ -164,8 +164,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Notes grilledNotes = new Notes();
         grilledNotes.setRecipeNotes("Dont do it better to cook with vapour");
         grilledChicken.setNotes(grilledNotes);
-        grilledChicken.getIngredients().add(new Ingredient("Chicken", new BigDecimal(1), each));
-        grilledChicken.getIngredients().add(new Ingredient("Garlic", new BigDecimal(2), teaspoon));
+        grilledChicken.addIngredient(new Ingredient("Chicken", new BigDecimal(1), each));
+        grilledChicken.addIngredient(new Ingredient("Garlic", new BigDecimal(2), teaspoon));
         grilledChicken.getCategories().add(fastFood);
         grilledChicken.getCategories().add(italian);
         recipieRepository.save(grilledChicken);
