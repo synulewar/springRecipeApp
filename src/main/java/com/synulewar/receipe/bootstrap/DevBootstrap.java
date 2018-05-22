@@ -4,6 +4,7 @@ import com.synulewar.receipe.model.*;
 import com.synulewar.receipe.repositories.CategoryRepository;
 import com.synulewar.receipe.repositories.RecipieRepository;
 import com.synulewar.receipe.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -174,7 +176,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        System.out.println("Enter bootstrap");
+        log.debug("Loading bootstrap data");
         initData();
     }
 }
