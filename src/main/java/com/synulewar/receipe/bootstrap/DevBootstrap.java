@@ -163,7 +163,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         grilledChicken.setPrepTime(20);
         grilledChicken.setCookTime(5);
         grilledChicken.setDifficulty(Difficulty.MEDIUM);
-        grilledChicken.setDirections("1. Random step i just have to type anythin\n2. Second part of miningless decription\n");
+        grilledChicken.setDirections("1. Random step i just have to type anythin." + "\n" + "2. Second part of miningless decription\n");
         Notes grilledNotes = new Notes();
         grilledNotes.setRecipeNotes("Dont do it better to cook with vapour");
         grilledChicken.setNotes(grilledNotes);
