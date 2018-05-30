@@ -1,5 +1,7 @@
 package com.synulewar.receipe.services;
 
+import com.synulewar.receipe.converters.RecipeCommandToRecipe;
+import com.synulewar.receipe.converters.RecipeToRecipeCommand;
 import com.synulewar.receipe.model.Recipe;
 import com.synulewar.receipe.repositories.RecipieRepository;
 import org.junit.Before;
@@ -23,10 +25,16 @@ public class RecipeServiceImplTest {
     @Mock
     RecipieRepository recipieRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipieRepository);
+        recipeService = new RecipeServiceImpl(recipieRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
 
