@@ -32,6 +32,7 @@ public class RecipeServiceImpl implements RecipeService {
         return recipes;
     }
 
+    @Transactional
     @Override
     public Recipe findById(Long id) {
 
