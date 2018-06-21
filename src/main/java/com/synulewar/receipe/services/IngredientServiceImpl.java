@@ -1,6 +1,7 @@
 package com.synulewar.receipe.services;
 
 import com.synulewar.receipe.commands.IngredientCommand;
+import com.synulewar.receipe.commands.RecepieCommand;
 import com.synulewar.receipe.converters.IngredientCommandToIngredient;
 import com.synulewar.receipe.converters.IngredientToIngredientCommand;
 import com.synulewar.receipe.model.Ingredient;
@@ -69,15 +70,62 @@ public class IngredientServiceImpl implements IngredientService {
                         findById(ingredientCommand.getUnitOfMeasure().getId())
                         .orElseThrow(() -> new RuntimeException("UOM not found")));
             } else {
-                recipe.addIngredient(ingredientCommandToIngredient.convert(ingredientCommand));
+                Ingredient ingredient = ingredientCommandToIngredient.convert(ingredientCommand);
+                ingredient.setRecipe(recipe);
+                recipe.addIngredient(ingredient);
             }
 
             Recipe recipeSaved = recipieRepository.save(recipe);
 
-            return ingredientToIngredientCommand.convert(recipeSaved.getIngredients().stream()
+            Optional<Ingredient> savedIngredientOptional = recipeSaved.getIngredients().stream()
                     .filter(recipeIngredient -> recipeIngredient.getId().equals(ingredientCommand.getId()))
-                    .findFirst()
-                    .get());
+                    .findFirst();
+
+            if (!savedIngredientOptional.isPresent()) {
+                savedIngredientOptional = recipeSaved.getIngredients().stream()
+                        .filter(recipeIngredient -> recipeIngredient.getDescription().equals(ingredientCommand.getDescription()))
+                        .filter(recipeIngredient -> recipeIngredient.getAmount().equals(ingredientCommand.getAmount()))
+                        .filter(recipeIngredient -> recipeIngredient.getUom().getId().equals(ingredientCommand.getUnitOfMeasure().getId()))
+                        .findFirst();
+
+            }
+
+            return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
         }
+    }
+
+    @Override
+    public void deleteIngredientById(Long recipeId, Long ingredientId) {
+        Optional<Recipe> recipeOptional = recipieRepository.findById(recipeId);
+        if (!recipeOptional.isPresent()) {
+            throw new RuntimeException("Recipe was not found!");
+        }
+
+        Recipe recipe = recipeOptional.get();
+        Optional<Ingredient> ingredientToDelete = recipe.getIngredients()
+                .stream()
+                .filter(ingedient -> ingedient.getId().equals(ingredientId))
+                .findFirst();
+
+        if (!ingredientToDelete.isPresent()) {
+            throw new RuntimeException("There is no ingredient to delete!");
+        }
+
+        Ingredient ingredient = ingredientToDelete.get();
+
+        log.debug("Before remove");
+        for (Ingredient ingr : recipe.getIngredients()) {
+            log.debug(ingr.getDescription());
+        }
+        //have to get rid of recipe -- ingredient connection to make it disappear
+        ingredient.setRecipe(null);
+        recipe.removeIngredient(ingredientToDelete.get());
+        recipieRepository.save(recipe);
+
+        log.debug("After remove");
+        for (Ingredient ingr : recipe.getIngredients()) {
+            log.debug(ingr.getDescription());
+        }
+
     }
 }

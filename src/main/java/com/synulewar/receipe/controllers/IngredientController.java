@@ -2,6 +2,8 @@ package com.synulewar.receipe.controllers;
 
 
 import com.synulewar.receipe.commands.IngredientCommand;
+import com.synulewar.receipe.commands.RecepieCommand;
+import com.synulewar.receipe.commands.UnitOfMeasureCommand;
 import com.synulewar.receipe.services.IngredientService;
 import com.synulewar.receipe.services.RecipeService;
 import com.synulewar.receipe.services.UnitOfMeasureService;
@@ -52,6 +54,19 @@ public class IngredientController {
         return "recipe/ingredient/ingredientform";
     }
 
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable String recipeId, Model model) {
+        RecepieCommand recepieCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+        model.addAttribute("ingredient", ingredientCommand);
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+        return "recipe/ingredient/ingredientform";
+    }
+
     @PostMapping("recipe/{recipeId}/ingredient")
     public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
@@ -59,6 +74,11 @@ public class IngredientController {
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
     }
 
-
-
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/{ingredientId}/delete")
+    public String deleteById(@PathVariable String recipeId, @PathVariable String ingredientId) {
+        log.debug("Deleting ingredient " + ingredientId + " from " + recipeId);
+        ingredientService.deleteIngredientById(Long.valueOf(recipeId), Long.valueOf(ingredientId));
+        return "redirect:/recipe/{recipeId}/ingredient";
+    }
 }
