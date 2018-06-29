@@ -4,6 +4,7 @@ import com.synulewar.receipe.converters.RecipeCommandToRecipe;
 import com.synulewar.receipe.converters.RecipeToRecipeCommand;
 import com.synulewar.receipe.model.Recipe;
 import com.synulewar.receipe.repositories.RecipieRepository;
+import exceptions.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -72,5 +73,12 @@ public class RecipeServiceImplTest {
         Long idTodelete = Long.valueOf(2L);
         recipeService.deleteById(idTodelete);
         verify(recipieRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdTestNotFound() throws Exception {
+        Optional<Recipe> optionalRecipe = Optional.empty();
+        when(recipieRepository.findById(anyLong())).thenReturn(optionalRecipe);
+        Recipe recipe = recipeService.findById(1L);
     }
 }

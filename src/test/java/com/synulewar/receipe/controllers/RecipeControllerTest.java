@@ -3,6 +3,7 @@ package com.synulewar.receipe.controllers;
 import com.synulewar.receipe.commands.RecepieCommand;
 import com.synulewar.receipe.model.Recipe;
 import com.synulewar.receipe.services.RecipeService;
+import exceptions.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -11,6 +12,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import javax.naming.NameNotFoundException;
+
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;

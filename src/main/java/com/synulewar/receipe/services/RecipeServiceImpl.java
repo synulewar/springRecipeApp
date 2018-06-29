@@ -5,6 +5,7 @@ import com.synulewar.receipe.converters.RecipeCommandToRecipe;
 import com.synulewar.receipe.converters.RecipeToRecipeCommand;
 import com.synulewar.receipe.model.Recipe;
 import com.synulewar.receipe.repositories.RecipieRepository;
+import exceptions.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +40,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipieRepository.findById(id);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe didn found");
+            throw new NotFoundException("Recipe didn found");
         }
 
         return recipeOptional.get();
