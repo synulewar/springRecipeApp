@@ -1,7 +1,6 @@
 package com.synulewar.receipe.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -41,9 +40,7 @@ public class Recipe {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe", fetch = FetchType.EAGER)
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    public void setNotes(Notes notes) {
-        this.notes = notes;
-        notes.setRecipe(this);
+    public Recipe() {
     }
 
     public Recipe addIngredient(Ingredient ingredient) {
@@ -56,4 +53,5 @@ public class Recipe {
         this.ingredients.remove(ingredient);
         return this;
     }
+
 }
